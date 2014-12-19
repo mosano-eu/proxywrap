@@ -31,10 +31,10 @@
     "url": "https://github.com/findhit/findhit-proxywrap"
   },
   "dependencies": {
-    "bluebird": "^2.3.11",
     "findhit-util": "^0.0.8"
   },
   "devDependencies": {
+    "bluebird": "^2.3.11",
     "chai": "^1.9.1",
     "mocha": "^1.21.3",
     "sinon": "^1.10.3"
