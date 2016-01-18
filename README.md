@@ -1,40 +1,48 @@
 # Proxywrap [![Build Status](https://travis-ci.org/findhit/proxywrap.svg?branch=master)](https://travis-ci.org/findhit/proxywrap)
 
-This module is a fork of original [proxywrap](https://github.com/daguej/node-proxywrap) by [Josh Dague](https://github.com/daguej). Unfortunately, the project doesn't have recent changes. As so, we decided to contribute to it by forking it and make it better. Do you have any idea to improve this? Feel free to open an **Issue** or **Pull Request**.
+## History
+
+This module is a fork of original [proxywrap](https://github.com/daguej/node-proxywrap) by [Josh Dague](https://github.com/daguej). Unfortunately, the project doesn't have recent changes. As so, we decided to contribute to it by forking it and make it better.
+
+Do you have any idea to improve this?
+Feel free to open an **Issue** or **Pull Request**.
+
+## What's the purpose of this module?
 
 This module wraps node's various `Server` interfaces so that they are compatible with the [PROXY protocol](http://haproxy.1wt.eu/download/1.5/doc/proxy-protocol.txt).  It automatically parses the PROXY headers and resets `socket.remoteAddress` and `socket.remotePort` so that they have the correct values.
-
-```
-
-    npm install findhit-proxywrap
-
-```
 
 This module is especially useful if you need to get the client IP address when you're behind an AWS ELB in TCP mode.
 
 In HTTP or HTTPS mode (aka SSL termination at ELB), the ELB inserts `X-Forwarded-For` headers for you.  However, in TCP mode, the ELB can't understand the underlying protocol, so you lose the client's IP address.  With the PROXY protocol and this module, you're able to retain the client IP address with any protocol.
 
-In order for this module to work, you must [enable the PROXY protocol on your ELB](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-proxy-protocol.html) (or whatever proxy your app is behind).
+In order for this module to work with ELB, you must [enable the PROXY protocol on your ELB](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-proxy-protocol.html) (or whatever proxy your app is behind).
 
-Usage
------
+## Compability
 
-proxywrap is a drop-in replacement.  Here's a simple Express app:
+This module is only compatible with **LTS** and **latest stable** versions of [node](https://github.com/nodejs/node).
 
+## Installing
+
+```bash
+npm install --save findhit-proxywrap
 ```
 
-    var http = require('http')
-        , proxiedHttp = require('findhit-proxywrap').proxy( http )
-        , express = require('express')
-        , app = express()
-        , srv = proxiedHttp.createServer(app); // instead of http.createServer(app)
+## Usage
 
-    app.get('/', function(req, res) {
-        res.send('IP = ' + req.connection.remoteAddress + ':' + req.connection.remotePort);
-    });
+**proxywrap** is a drop-in replacement.  Here's a simple Express app:
 
-    srv.listen(80);
+```js
+var http = require( 'http' )
+var proxiedHttp = require( 'findhit-proxywrap' ).proxy( http )
+var express = require( 'express' )
+var app = express()
 
+// instead of http.createServer(app)
+var srv = proxiedHttp.createServer( app ).listen( 80 )
+
+app.get( '/', ( req, res ) => {
+    res.send( 'IP = ' + req.connection.remoteAddress + ':' + req.connection.remotePort )
+})
 ```
 
 The magic happens in the `proxywrap.proxy()` call.  It wraps the module's `Server` constructor and handles a bunch of messy details for you.
@@ -55,8 +63,8 @@ This also adds to all your sockets the properties:
 
 **Warning:** By default, *all* traffic to your proxied server MUST use the PROXY protocol.  If the first five bytes received aren't `PROXY`, the connection will be dropped.  Obviously, the node server accepting PROXY connections should not be exposed directly to the internet; only the proxy (whether ELB, HAProxy, or something else) should be able to connect to node.
 
-API
----
+## API
+
 
 ### `proxy(Server[, options])`
 
@@ -71,7 +79,6 @@ Options:
 - `overrideRemote` (default `true`): **findhit-proxywrap** overrides `socket.remoteAddress` and `socket.remotePort` for compability proposes. If you set this as `false`, your `socket.remoteAddress` and `socket.remotePort` will have the Address and Port of your **load-balancer** or whatever you are using behind your app. You can also access client's Address and Port by using `socket.clientAddress` and `socket.clientPort`.
 
 
-Thanks
-------
+## Thanks
 
 Huge thanks to [Josh Dague](https://github.com/daguej) for creating original [proxywrap](https://github.com/daguej/node-proxywrap).
