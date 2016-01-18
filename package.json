@@ -23,7 +23,7 @@
     "node": ">= 0.8"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 3000 --reporter spec $(find test/* -name '*.test.js')",
+    "test": "jshint . && mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 3000 --reporter spec $(find test/* -name '*.test.js')",
     "preversion": "npm test",
     "postversion": "git push origin master && git push origin --tags && npm publish"
   },
@@ -37,6 +37,7 @@
   "devDependencies": {
     "bluebird": "^2.5.3",
     "chai": "^1.10.0",
+    "jshint": "^2.9.1",
     "mocha": "^2.1.0",
     "sinon": "^1.12.2",
     "spdy": "^1.31.0"
