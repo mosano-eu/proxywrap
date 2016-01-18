@@ -23,7 +23,9 @@
     "node": ">= 0.8"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 3000 --reporter spec $(find test/* -name '*.test.js')"
+    "test": "node node_modules/mocha/bin/mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 3000 --reporter spec $(find test/* -name '*.test.js')",
+    "preversion": "npm test",
+    "postversion": "git push origin master && git push origin --tags && npm publish"
   },
   "repository": {
     "type": "git",
