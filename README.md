@@ -4,9 +4,6 @@
 
 This module is a fork of original [proxywrap](https://github.com/daguej/node-proxywrap) by [Josh Dague](https://github.com/daguej). Unfortunately, the project doesn't have recent changes. As so, we decided to contribute to it by forking it and make it better.
 
-Do you have any idea to improve this?
-Feel free to open an **Issue** or **Pull Request**.
-
 ## What's the purpose of this module?
 
 This module wraps node's various `Server` interfaces so that they are compatible with the [PROXY protocol](http://haproxy.1wt.eu/download/1.5/doc/proxy-protocol.txt).  It automatically parses the PROXY headers and resets `socket.remoteAddress` and `socket.remotePort` so that they have the correct values.
@@ -78,7 +75,20 @@ Options:
 
 - `overrideRemote` (default `true`): **findhit-proxywrap** overrides `socket.remoteAddress` and `socket.remotePort` for compability proposes. If you set this as `false`, your `socket.remoteAddress` and `socket.remotePort` will have the Address and Port of your **load-balancer** or whatever you are using behind your app. You can also access client's Address and Port by using `socket.clientAddress` and `socket.clientPort`.
 
+## Contribute
+
+Do you have any idea to improve this module?
+Feel free to open an [Issue](https://github.com/findhit/proxywrap/issues/new) or a [Pull Request](https://github.com/findhit/proxywrap/pulls).
+
+### People who have contributed so far
+
+* [@cusspvz](https://github.com/cusspvz)
+* [@daguej](https://github.com/daguej)
+* [@revington](https://github.com/revington)
+* [@mvalo](https://github.com/mvalo)
+* [@sandfox](https://github.com/sandfox)
+* [@xaka](https://github.com/xaka)
 
 ## Thanks
 
-Huge thanks to [Josh Dague](https://github.com/daguej) for creating original [proxywrap](https://github.com/daguej/node-proxywrap).
+Thanks to all contibuters and special thanks to [Josh Dague](https://github.com/daguej) for creating original [proxywrap](https://github.com/daguej/node-proxywrap).
