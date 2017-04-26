@@ -5,8 +5,8 @@ var Util = require( 'findhit-util' )
 var protocols = {
 		net: require( 'net' ),
 		http: require( 'http' ),
-		// https: require( 'https' ),
-		// spdy: require( 'spdy' ).server
+		https: require( 'https' ),
+		spdy: require( 'spdy' ).server
 	}
 
 var Chai = require( 'chai' )
@@ -34,7 +34,8 @@ module.exports = {
 		var pc = protocols[ p ]
 		var proxy = ProxyWrap.proxy( pc, options )
 
-		var server = proxy.createServer()
+		opts = p === 'https' ? {} : null
+		var server = proxy.createServer(opts)
 		var port = Math.floor( ( Math.random() * 5000 ) + 15000 ) // To be sure that the port is not beeing used on test side
 		var host = '127.0.0.1'
 
