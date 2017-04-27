@@ -3,6 +3,7 @@ CHANGELOG
 
 # Upcoming
 - Fixed HTTPS connection
+- Updated spdy module version
 
 # 0.3.11
 - Fixed an issue where some connections were remaining opened. Thanks @revington [#15](https://github.com/findhit/proxywrap/issues/15)
