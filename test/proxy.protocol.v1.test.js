@@ -26,12 +26,12 @@ describe( "PROXY Protocol v1", function () {
 		v1tests( 'https', server );
 	});
 
+/*
 	describe( 'spdy', function () {
 		var server = tUtil.createServer( 'spdy', { strict: true });
-
 		v1tests( 'spdy', server );
 	});
-
+*/
 });
 
 
