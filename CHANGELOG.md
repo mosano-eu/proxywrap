@@ -2,6 +2,8 @@ CHANGELOG
 =========
 
 # Upcoming
+
+# 0.3.12
 - Fixed HTTPS connection
 - Updated spdy module version
 
