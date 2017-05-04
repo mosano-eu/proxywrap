@@ -1,13 +1,23 @@
 var ProxyWrap = require( '../index' )
 var Promise = require( 'bluebird' )
 var Util = require( 'findhit-util' )
+var fs = require('fs')
+
+function isSecureProtocol (protocol) {
+	return protocol === 'https' || protocol == 'spdy'
+}
 
 var protocols = {
-		net: require( 'net' ),
-		http: require( 'http' ),
-		// https: require( 'https' ),
-		// spdy: require( 'spdy' ).server
-	}
+	net: require( 'net' ),
+	http: require( 'http' ),
+	https: require( 'https' ),
+	spdy: require( 'spdy' ).server
+}
+
+var secureOptions = {
+	key: fs.readFileSync('test/fixtures/key.pem'),
+	cert: fs.readFileSync('test/fixtures/cert.pem')
+}
 
 var Chai = require( 'chai' )
 var expect = Chai.expect
@@ -34,8 +44,8 @@ module.exports = {
 		var pc = protocols[ p ]
 		var proxy = ProxyWrap.proxy( pc, options )
 
-		var server = proxy.createServer()
-		var port = Math.floor( ( Math.random() * 5000 ) + 15000 ) // To be sure that the port is not beeing used on test side
+		var server = proxy.createServer( isSecureProtocol(p) ? secureOptions : null )
+		var port = Math.floor( ( Math.random() * 5000 ) + 20000 ) // To be sure that the port is not beeing used on test side
 		var host = '127.0.0.1'
 
 		server._protocol = p
@@ -116,7 +126,7 @@ module.exports = {
 					}
 				}
 
-				if( options.autoCloseSocket ) {
+				if( options.autoCloseSocket && ! isSecureProtocol(p) ) {
 					socket.end()
 				} else {
 					fulfill( value )

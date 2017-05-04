@@ -21,19 +21,15 @@ describe( "PROXY Protocol v1", function () {
 		v1tests( 'http', server );
 	});
 
-	/*
 	describe( 'https', function () {
 		var server = tUtil.createServer( 'https', { strict: true });
-
-		v1tests( server );
+		v1tests( 'https', server );
 	});
 
 	describe( 'spdy', function () {
 		var server = tUtil.createServer( 'spdy', { strict: true });
-
-		v1tests( server );
+		v1tests( 'spdy', server );
 	});
-	*/
 
 });
 
