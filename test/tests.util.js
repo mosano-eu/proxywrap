@@ -45,7 +45,7 @@ module.exports = {
 		var proxy = ProxyWrap.proxy( pc, options )
 
 		var server = proxy.createServer( isSecureProtocol(p) ? secureOptions : null )
-		var port = Math.floor( ( Math.random() * 5000 ) + 15000 ) // To be sure that the port is not beeing used on test side
+		var port = Math.floor( ( Math.random() * 5000 ) + 20000 ) // To be sure that the port is not beeing used on test side
 		var host = '127.0.0.1'
 
 		server._protocol = p
