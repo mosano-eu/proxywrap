@@ -1,6 +1,5 @@
 var Util = require('findhit-util'),
   tUtil = require('./tests.util'),
-  Promise = require('bluebird'),
   net = require('net'),
   sinon = require('sinon'),
   chai = require('chai'),

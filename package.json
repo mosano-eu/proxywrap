@@ -34,15 +34,14 @@
     "url": "https://github.com/findhit/proxywrap"
   },
   "dependencies": {
-    "findhit-util": "^0.2.3"
+    "findhit-util": "^0.2.9"
   },
   "devDependencies": {
-    "bluebird": "^2.5.3",
-    "chai": "^1.10.0",
-    "eslint": "^3.19.0",
-    "mocha": "^2.1.0",
-    "sinon": "^1.12.2",
-    "spdy": "^3.4.4"
+    "chai": "^4.2.0",
+    "eslint": "^7.16.0",
+    "mocha": "^8.2.1",
+    "sinon": "^9.2.2",
+    "spdy": "^4.0.2"
   },
   "keywords": [
     "proxy",

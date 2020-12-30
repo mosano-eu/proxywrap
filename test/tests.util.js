@@ -1,5 +1,4 @@
 var ProxyWrap = require('../')
-var Promise = require('bluebird')
 var Util = require('findhit-util')
 var fs = require('fs')
 
