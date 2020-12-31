@@ -38,7 +38,6 @@
     "url": "https://github.com/findhit/proxywrap"
   },
   "dependencies": {
-    "findhit-util": "^0.2.9",
     "proxy-protocol-v2": "^1.0.0-dev-81558e614b7b74d65747e240365e573becdd8c73"
   },
   "devDependencies": {

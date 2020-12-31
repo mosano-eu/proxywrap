@@ -1,5 +1,4 @@
-var Util = require('findhit-util'),
-  tUtil = require('./tests.util'),
+var tUtil = require('./tests.util'),
   net = require('net'),
   chai = require('chai'),
   expect = chai.expect;

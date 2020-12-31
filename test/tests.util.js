@@ -1,5 +1,4 @@
 var ProxyWrap = require('../')
-var Util = require('findhit-util')
 var fs = require('fs')
 const proxyProtocol = require('proxy-protocol-v2');
 
@@ -61,11 +60,10 @@ module.exports = {
     var body, p = server._protocol, pc = server._protocolConstructor
 
     // Prepare options
-    options = Object.assign(
-      {},
-      module.defaults.fakeConnect,
-      (Util.is.Object(options) && options) || {}
-    )
+    options = {
+      ...module.defaults.fakeConnect,
+      ...options,
+    };
     let header;
     if (!options.header) {
       header = proxyProtocol[`v${options.protocolVersion ?? 1}_encode`]({

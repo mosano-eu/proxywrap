@@ -737,11 +737,6 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
-findhit-util@^0.2.9:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/findhit-util/-/findhit-util-0.2.9.tgz#b30221eccacb95b0477a326c07c6037f7c06ffaf"
-  integrity sha1-swIh7MrLlbBHejJsB8YDf3wG/68=
-
 flat-cache@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.0.4.tgz#61b0338302b2fe9f957dcc32fc2a87f1c3048b11"
