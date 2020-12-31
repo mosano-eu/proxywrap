@@ -1,6 +1,7 @@
 var ProxyWrap = require('../')
 var Util = require('findhit-util')
 var fs = require('fs')
+const proxyProtocol = require('proxy-protocol-v2');
 
 function isSecureProtocol(protocol) {
   return protocol === 'https' || protocol == 'spdy'
@@ -24,15 +25,13 @@ var expect = Chai.expect
 module.defaults = {
   fakeConnect: {
     protocol: 'TCP4',
-    clientAddress: '10.10.10.1',
-    clientPort: 12456,
-    proxyAddress: '10.10.10.254',
-    proxyPort: 80,
-
     autoCloseSocket: true,
     testAttributes: true,
-
-    header: undefined,
+    clientAddress: '10.10.10.1',
+    proxyAddress: '10.10.10.254',
+    remoteAddress: '10.10.10.1',
+    clientPort: 12456,
+    proxyPort: 80,
     headerJoinCRLF: true
   }
 }
@@ -59,28 +58,27 @@ module.exports = {
   },
 
   fakeConnect: function(server, options) {
-    var header, body, p = server._protocol, pc = server._protocolConstructor
+    var body, p = server._protocol, pc = server._protocolConstructor
 
     // Prepare options
-    options = Util.extend(
+    options = Object.assign(
       {},
       module.defaults.fakeConnect,
       (Util.is.Object(options) && options) || {}
     )
+    let header;
+    if (!options.header) {
+      header = proxyProtocol[`v${options.protocolVersion ?? 1}_encode`]({
+        remoteAddress: options.clientAddress,
+        remotePort: options.clientPort,
+        localAddress: options.proxyAddress,
+        localPort: options.proxyPort,  
+      });
+    } else {
+      header = Buffer.from(options.header)
+    }
 
-    // Build header
-    header =
-      (options.header ||
-        [
-          'PROXY',
-          options.protocol,
-          options.clientAddress,
-          options.proxyAddress,
-          options.clientPort,
-          options.proxyPort
-        ].join(' ')) + ((options.headerJoinCRLF && '\r\n') || '')
-
-    body = ['GET /something/cool HTTP/1.1', 'Host: www.findhit.com'].join('\n')
+    body = Buffer.from(['GET /something/cool HTTP/1.1', 'Host: www.findhit.com'].join('\n'))
 
     return (new Promise(function ( fulfill, reject ) {
       if ( typeof server.listening == 'boolean' ) {
@@ -140,7 +138,7 @@ module.exports = {
 
         client.once('connect', function() {
           // Send header and body
-          client.write(header + body)
+          client.write(Buffer.concat([header, body]))
         })
 
         client.connect(port, host)
