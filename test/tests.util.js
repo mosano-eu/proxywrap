@@ -66,7 +66,7 @@ module.exports = {
     };
     let header;
     if (!options.header) {
-      header = proxyProtocol[`v${options.protocolVersion ?? 1}_encode`]({
+      header = proxyProtocol[`v${options.protocolVersion || 1}_encode`]({
         remoteAddress: options.clientAddress,
         remotePort: options.clientPort,
         localAddress: options.proxyAddress,
