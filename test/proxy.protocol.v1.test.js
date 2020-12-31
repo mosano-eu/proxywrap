@@ -1,9 +1,9 @@
 var Util = require('findhit-util'),
   tUtil = require('./tests.util'),
   net = require('net'),
-  sinon = require('sinon'),
   chai = require('chai'),
-  expect = chai.expect
+  expect = chai.expect;
+const proxyProtocol = require('proxy-protocol-v2')
 
 describe('PROXY Protocol v1', function() {
   describe('net', function() {
@@ -41,9 +41,15 @@ function v1tests(proto, server) {
     })
   })
 
-  it('Check with another socket parameters as a string', function() {
+  it('Check with another socket parameters as a string in v1 format', function() {
     return tUtil.fakeConnect(server, {
-      header: 'PROXY TCP4 192.168.0.1 192.168.0.254 3350 443'
+      header: proxyProtocol.v1_encode({
+        remoteFamily: 'IPv4',
+        remoteAddress: '192.168.0.254',
+        localAddress: '192.168.0.1',
+        localPort: 443,
+        remotePort: 3350,
+      })
     })
   })
 

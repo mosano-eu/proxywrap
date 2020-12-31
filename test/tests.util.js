@@ -117,14 +117,14 @@ module.exports = {
 
           if (options.testAttributes && !options.header) {
             try {
-              expect(socket.clientAddress).to.be.equal(options.clientAddress)
-              expect(socket.proxyAddress).to.be.equal(options.proxyAddress)
-              expect(socket.clientPort).to.be.equal(options.clientPort)
-              expect(socket.proxyPort).to.be.equal(options.proxyPort)
+              expect(socket.clientAddress).to.be.equal(options.clientAddress, 'Client address does not match')
+              expect(socket.proxyAddress).to.be.equal(options.proxyAddress, 'Proxy address does not match')
+              expect(socket.clientPort).to.be.equal(options.clientPort, 'Client port does not match')
+              expect(socket.proxyPort).to.be.equal(options.proxyPort, 'Proxy port does not match')
 
               if (server.constructor.options.overrideRemote) {
-                expect(socket.remoteAddress).to.be.equal(options.clientAddress)
-                expect(socket.remotePort).to.be.equal(options.clientPort)
+                expect(socket.remoteAddress).to.be.equal(options.clientAddress, 'Remote address does not match')
+                expect(socket.remotePort).to.be.equal(options.clientPort, 'Remote port does not match')
               }
             } catch (err) {
               reject(err)

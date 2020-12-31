@@ -25,7 +25,7 @@
   "scripts": {
     "dev": "mocha --debug-brk=5858 --globals setImmediate,clearImmediate --check-leaks --colors -t 3000 --reporter spec $(find test/* -name '*.test.js')",
     "lint": "eslint .",
-    "test": "mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 3000 --reporter spec $(find test/* -name '*.test.js')",
+    "test": "mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 3000 --exit --reporter spec $(find test/* -name '*.test.js')",
     "preversion": "npm test",
     "postversion": "git push origin master && git push origin --tags && npm publish"
   },
@@ -34,11 +34,14 @@
     "url": "https://github.com/findhit/proxywrap"
   },
   "dependencies": {
-    "findhit-util": "^0.2.9"
+    "findhit-util": "^0.2.9",
+    "proxy-protocol-v2": "^1.0.0-dev-81558e614b7b74d65747e240365e573becdd8c73"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^7.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.1",
     "sinon": "^9.2.2",
     "spdy": "^4.0.2"
