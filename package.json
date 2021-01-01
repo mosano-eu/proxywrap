@@ -29,7 +29,7 @@
   "scripts": {
     "dev": "mocha --debug-brk=5858 --globals setImmediate,clearImmediate --check-leaks --colors -t 3000 --reporter spec $(find test/* -name '*.test.js')",
     "lint": "eslint .",
-    "test": "mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 3000 --exit --reporter spec $(find test/* -name '*.test.js')",
+    "test": "nyc mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 3000 --exit --reporter spec $(find test/* -name '*.test.js')",
     "preversion": "npm test",
     "postversion": "git push origin master && git push origin --tags && npm publish"
   },
@@ -46,6 +46,7 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
     "sinon": "^9.2.2",
     "spdy": "^4.0.2"
   },
