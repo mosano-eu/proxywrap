@@ -1,25 +1,25 @@
-var ProxyWrap = require('../')
-var fs = require('fs')
+const ProxyWrap = require('../')
+const fs = require('fs')
 const proxyProtocol = require('@balena/proxy-protocol-parser')
 
 function isSecureProtocol(protocol) {
   return protocol === 'https' || protocol == 'spdy'
 }
 
-var protocols = {
+const protocols = {
   net: require('net'),
   http: require('http'),
   https: require('https'),
   spdy: require('spdy').server
 }
 
-var secureOptions = {
+const secureOptions = {
   key: fs.readFileSync('test/fixtures/key.pem'),
   cert: fs.readFileSync('test/fixtures/cert.pem')
 }
 
-var Chai = require('chai')
-var expect = Chai.expect
+const Chai = require('chai')
+const expect = Chai.expect
 
 module.defaults = {
   fakeConnect: {
@@ -37,12 +37,12 @@ module.defaults = {
 
 module.exports = {
   createServer: function(p, options) {
-    var pc = protocols[p]
-    var proxy = ProxyWrap.proxy(pc, options)
+    const pc = protocols[p]
+    const proxy = ProxyWrap.proxy(pc, options)
 
-    var server = proxy.createServer(isSecureProtocol(p) ? secureOptions : null)
-    var port = Math.floor(Math.random() * 5000 + 20000) // To be sure that the port is not beeing used on test side
-    var host = '127.0.0.1'
+    const server = proxy.createServer(isSecureProtocol(p) ? secureOptions : null)
+    const port = Math.floor(Math.random() * 5000 + 20000) // To be sure that the port is not beeing used on test side
+    const host = '127.0.0.1'
 
     server._protocol = p
     server._protocolConstructor = pc
@@ -57,7 +57,7 @@ module.exports = {
   },
 
   fakeConnect: function(server, options) {
-    var body, p = server._protocol, pc = server._protocolConstructor
+    const p = server._protocol;
 
     // Prepare options
     options = {
@@ -76,7 +76,7 @@ module.exports = {
       header = Buffer.from(options.header)
     }
 
-    body = Buffer.from(['GET /something/cool HTTP/1.1', 'Host: www.findhit.com'].join('\n'))
+    const body = Buffer.from(['GET /something/cool HTTP/1.1', 'Host: www.findhit.com'].join('\n'))
 
     return (new Promise(function ( fulfill, reject ) {
       if ( typeof server.listening == 'boolean' ) {
@@ -92,11 +92,11 @@ module.exports = {
     }))
     .then(function () {
       return new Promise(function(fulfill, reject) {
-        var client = new protocols.net.Socket(),
+        const client = new protocols.net.Socket(),
           host = server.host,
           port = server.port
 
-        var value = [undefined, client]
+        const value = [undefined, client]
 
         server.once('connection', function(socket) {
           socket.on('error', function(err) {

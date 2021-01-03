@@ -1,16 +1,14 @@
 /* related to issue https://github.com/findhit/proxywrap/issues/15 */
-var http = require('http')
-var assert = require('assert')
-var net = require('net')
-var exec = require('child_process').exec
-var child
-var proxyWrap = require('../..')
+const http = require('http')
+const assert = require('assert')
+const net = require('net')
+const exec = require('child_process').exec
+const proxyWrap = require('../..')
 
 function findCloseWaitConnections(port, callback) {
-  var child = exec('netstat -tonp | grep 8000 | grep CLOSE_WAIT', function(
+  exec('netstat -tonp | grep 8000 | grep CLOSE_WAIT', function(
     err,
     stdout,
-    stderr
   ) {
     if (err) {
       return callback(err)
@@ -20,7 +18,7 @@ function findCloseWaitConnections(port, callback) {
 }
 
 function reproduce(proxyWrapConf, callback) {
-  var socket, server, port, proxiedHttp
+  let socket, server, port, proxiedHttp
   if (!callback) {
     callback = proxyWrapConf
     proxyWrapConf = null
@@ -56,7 +54,7 @@ function reproduce(proxyWrapConf, callback) {
 
 describe('Sockets closed before any write #15', function() {
   describe('On strict mode', function() {
-    var port, server
+    let port, server
 
     before(function(done) {
       reproduce(function(err, _server) {
@@ -79,7 +77,7 @@ describe('Sockets closed before any write #15', function() {
   })
 
   describe('On non-strict mode', function() {
-    var port, server
+    let port, server
 
     before(function(done) {
       reproduce(

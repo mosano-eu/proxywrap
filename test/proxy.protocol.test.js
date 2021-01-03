@@ -1,4 +1,4 @@
-var tUtil = require('./tests.util'),
+const tUtil = require('./tests.util'),
   net = require('net'),
   chai = require('chai'),
   expect = chai.expect;
@@ -8,22 +8,22 @@ for (const protocolVersion of [1, 2]) {
   const proxyProtocolEncode = proxyProtocol[`v${protocolVersion}_encode`];
   describe(`PROXY Protocol v${protocolVersion}`, function () {
     describe('net', function () {
-      var server = tUtil.createServer('net', { strict: true, protocolVersion })
+      const server = tUtil.createServer('net', { strict: true, protocolVersion })
       v1tests('net', server)
     })
 
     describe('http', function () {
-      var server = tUtil.createServer('http', { strict: true, protocolVersion })
+      const server = tUtil.createServer('http', { strict: true, protocolVersion })
       v1tests('http', server)
     })
 
     describe('https', function () {
-      var server = tUtil.createServer('https', { strict: true, protocolVersion })
+      const server = tUtil.createServer('https', { strict: true, protocolVersion })
       v1tests('https', server)
     })
 
     describe('spdy', function () {
-      var server = tUtil.createServer('spdy', { strict: true, protocolVersion })
+      const server = tUtil.createServer('spdy', { strict: true, protocolVersion })
       v1tests('spdy', server)
     })
   })
@@ -112,13 +112,13 @@ for (const protocolVersion of [1, 2]) {
       it('should drop connection gracefully when non-proxy connection is gathered when `ignoreStrictExceptions` is active. #11', function (
         cb
       ) {
-        var server = tUtil.createServer(proto, {
+        const server = tUtil.createServer(proto, {
           strict: true,
           ignoreStrictExceptions: true
         })
 
         server.once('listening', function () {
-          var client = new net.Socket()
+          const client = new net.Socket()
 
           client.on('end', cb)
 
