@@ -2,7 +2,7 @@ var tUtil = require('./tests.util'),
   net = require('net'),
   chai = require('chai'),
   expect = chai.expect;
-const proxyProtocol = require('proxy-protocol-v2')
+const proxyProtocol = require('@balena/proxy-protocol-parser');
 
 for (const protocolVersion of [1, 2]) {
   const proxyProtocolEncode = proxyProtocol[`v${protocolVersion}_encode`];

@@ -1,6 +1,6 @@
 var ProxyWrap = require('../')
 var fs = require('fs')
-const proxyProtocol = require('proxy-protocol-v2');
+const proxyProtocol = require('@balena/proxy-protocol-parser')
 
 function isSecureProtocol(protocol) {
   return protocol === 'https' || protocol == 'spdy'
