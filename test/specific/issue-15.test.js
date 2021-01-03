@@ -18,21 +18,21 @@ function findCloseWaitConnections(port, callback) {
 }
 
 function reproduce(proxyWrapConf, callback) {
-  let socket, server, port, proxiedHttp
+  let socket, port
   if (!callback) {
     callback = proxyWrapConf
     proxyWrapConf = null
   }
 
-  proxiedHttp = proxyWrap.proxy(http, proxyWrapConf)
+  const proxiedHttp = proxyWrap.proxy(http, proxyWrapConf)
 
-  server = proxiedHttp
-    .createServer(function handler(req, res) {
+  const server = proxiedHttp
+    .createServer(function handler() {
       throw new Error('For this test socket should not call #write()')
     })
     .listen(function(err) {
       if (err) {
-        return done(err)
+        return callback(err)
       }
 
       port = this.address().port
