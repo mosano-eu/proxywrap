@@ -3,6 +3,10 @@ CHANGELOG
 
 # Upcoming
 
+# 1.0.0-alpha.2
+- Added http2 support
+
+
 # 1.0.0-alpha.1
 - Added support to proxy protocol v2
 - Parsing proxy protocol via @balena/proxy-protocol-parser module instead of regex

@@ -1,6 +1,6 @@
 # Proxywrap [![Build Status](https://travis-ci.org/findhit/proxywrap.svg?branch=master)](https://travis-ci.org/findhit/proxywrap)
 
-Add PROXY v1 or v2 support to net, http, https, spdy servers. IPv4 and IPv6 protocols supported
+Add PROXY v1 or v2 support to net, http, https, spdy and http2 servers. IPv4 and IPv6 protocols supported
 
 ## History
 

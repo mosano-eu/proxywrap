@@ -3,14 +3,14 @@ const fs = require('fs')
 const proxyProtocol = require('@balena/proxy-protocol-parser')
 
 function isSecureProtocol(protocol) {
-  return protocol === 'https' || protocol == 'spdy'
+  return protocol === 'https' || protocol == 'spdy' || protocol == 'http2';
 }
 
 const protocols = {
   net: require('net'),
   http: require('http'),
   https: require('https'),
-  spdy: require('spdy').server,
+  spdy: require('spdy'),
   http2: require('http2'),
 }
 
@@ -40,8 +40,7 @@ module.exports = {
   createServer: function(p, options) {
     const pc = protocols[p]
     const proxy = ProxyWrap.proxy(pc, options)
-
-    const server = proxy.createServer(isSecureProtocol(p) ? secureOptions : null)
+    const server = proxy.createServer(isSecureProtocol(p) ? secureOptions : {})
     const port = Math.floor(Math.random() * 5000 + 20000) // To be sure that the port is not beeing used on test side
     const host = '127.0.0.1'
 
@@ -96,7 +95,6 @@ module.exports = {
         const client = new protocols.net.Socket(),
           host = server.host,
           port = server.port
-
         const value = [undefined, client]
 
         server.once('connection', function(socket) {
@@ -118,8 +116,7 @@ module.exports = {
               expect(socket.proxyAddress).to.be.equal(options.proxyAddress, 'Proxy address does not match')
               expect(socket.clientPort).to.be.equal(options.clientPort, 'Client port does not match')
               expect(socket.proxyPort).to.be.equal(options.proxyPort, 'Proxy port does not match')
-
-              if (server.constructor.options.overrideRemote) {
+              if (server.proxyOptions.overrideRemote) {
                 expect(socket.remoteAddress).to.be.equal(options.clientAddress, 'Remote address does not match')
                 expect(socket.remotePort).to.be.equal(options.clientPort, 'Remote port does not match')
               }

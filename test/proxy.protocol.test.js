@@ -4,7 +4,7 @@ const tUtil = require('./tests.util'),
   expect = chai.expect;
 const proxyProtocol = require('@balena/proxy-protocol-parser');
 
-for (const serverType of ['net', 'http', 'https', 'spdy']) {
+for (const serverType of ['net', 'http', 'https', 'spdy', 'http2']) {
   for (const protocolVersion of [1, 2]) {
     const proxyProtocolEncode = proxyProtocol[`v${protocolVersion}_encode`];
     describe(`PROXY Protocol v${protocolVersion} server: ${serverType}`, function () {
