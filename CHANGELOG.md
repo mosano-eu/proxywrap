@@ -3,6 +3,14 @@ CHANGELOG
 
 # Upcoming
 
+# 1.0.0-alpha.1
+- Added support to proxy protocol v2
+- Parsing proxy protocol via @balena/proxy-protocol-parser module instead of regex
+- IPv6 support
+- Updated code for latest ES features
+- Fixed a bug when server.setTimeout did not trigger timeout event
+- Removed dependency on object-extends and findhit-util
+
 # 0.3.12
 - Fixed HTTPS connection
 - Updated spdy module version
