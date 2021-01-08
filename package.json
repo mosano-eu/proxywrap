@@ -1,5 +1,5 @@
 {
-  "name": "findhit-proxywrap",
+  "name": "@short.io/proxywrap",
   "version": "1.0.0-alpha.1",
   "description": "Wraps node's Server interfaces to be compatible with the PROXY protocol",
   "main": "lib/proxywrap.js",
@@ -24,7 +24,7 @@
     }
   ],
   "engines": {
-    "node": ">= 0.8"
+    "node": ">= 10"
   },
   "scripts": {
     "dev": "mocha --debug-brk=5858 --globals setImmediate,clearImmediate --check-leaks --colors -t 3000 --reporter spec $(find test/* -name '*.test.js')",
@@ -35,7 +35,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/findhit/proxywrap"
+    "url": "https://github.com/short-io/proxywrap"
   },
   "dependencies": {
     "@balena/proxy-protocol-parser": "^1.0.2"
@@ -55,6 +55,6 @@
     "elb"
   ],
   "bugs": {
-    "url": "https://github.com/findhit/proxywrap/issues"
+    "url": "https://github.com/short-io/proxywrap/issues"
   }
 }

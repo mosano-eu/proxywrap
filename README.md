@@ -1,8 +1,11 @@
 # Proxywrap [![Build Status](https://travis-ci.org/findhit/proxywrap.svg?branch=master)](https://travis-ci.org/findhit/proxywrap)
 
+Add PROXY v1 or v2 support to net, http, https, spdy servers. IPv4 and IPv6 protocols supported
+
 ## History
 
-This module is a fork of original [proxywrap](https://github.com/daguej/node-proxywrap) by [Josh Dague](https://github.com/daguej). Unfortunately, the project doesn't have recent changes. As so, we decided to contribute to it by forking it and make it better.
+This module is a fork of original [proxywrap](https://github.com/cusspvz/proxywrap) by [Josh Dague](https://github.com/daguej) and [José Moreira
+](https://github.com/cusspvz). Unfortunately, the project doesn't have recent changes. As so, we decided to contribute to it by forking it and make it better.
 
 ## What's the purpose of this module?
 
@@ -21,7 +24,7 @@ This module is only compatible with **LTS** and **latest stable** versions of [n
 ## Installing
 
 ```bash
-npm install --save findhit-proxywrap
+npm install --save @short.io/proxywrap
 ```
 
 ## Usage
