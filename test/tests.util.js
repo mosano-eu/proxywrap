@@ -10,7 +10,8 @@ const protocols = {
   net: require('net'),
   http: require('http'),
   https: require('https'),
-  spdy: require('spdy').server
+  spdy: require('spdy').server,
+  http2: require('http2'),
 }
 
 const secureOptions = {
