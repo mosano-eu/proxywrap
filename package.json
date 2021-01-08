@@ -1,6 +1,6 @@
 {
   "name": "@short.io/proxywrap",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Wraps node's Server interfaces to be compatible with the PROXY v1 or v2 protocol. Supports IPv4 and IPv6",
   "main": "lib/proxywrap.js",
   "author": "Josh Dague",
