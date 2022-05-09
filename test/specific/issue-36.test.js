@@ -18,7 +18,7 @@ function proxyWrapOptions(options) {
     return ProxyWrap.proxy(net, options).options;
 }
 
-describe('Check option default logic as compared to original findhat-util #36', function() {
+describe('Check option default logic as compared to original findhit-util #36', function() {
 
     it('for undefined', function() {
         assert.deepEqual(proxyWrapOptions(), findhitUtilOptions());
