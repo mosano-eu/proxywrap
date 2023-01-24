@@ -1,8 +1,12 @@
 {
   "name": "findhit-proxywrap",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "description": "Wraps node's Server interfaces to be compatible with the PROXY protocol",
   "main": "lib/proxywrap.js",
+  "files": [
+    "lib/**",
+    "yarn*"
+  ],
   "author": "Josh Dague",
   "license": "BSD",
   "contributors": [
@@ -34,12 +38,13 @@
     "url": "https://github.com/findhit/proxywrap"
   },
   "dependencies": {
-    "findhit-util": "^0.2.3"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "bluebird": "^2.5.3",
     "chai": "^1.10.0",
     "eslint": "^3.19.0",
+    "findhit-util": "^0.2.3",
     "mocha": "^2.1.0",
     "sinon": "^1.12.2",
     "spdy": "^3.4.4"

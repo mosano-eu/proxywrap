@@ -1,6 +1,6 @@
 var ProxyWrap = require('../')
 var Promise = require('bluebird')
-var Util = require('findhit-util')
+var _ = require('lodash')
 var fs = require('fs')
 
 function isSecureProtocol(protocol) {
@@ -63,10 +63,10 @@ module.exports = {
     var header, body, p = server._protocol, pc = server._protocolConstructor
 
     // Prepare options
-    options = Util.extend(
+    options = _.merge(
       {},
       module.defaults.fakeConnect,
-      (Util.is.Object(options) && options) || {}
+      (_.isPlainObject(options) && options) || null
     )
 
     // Build header

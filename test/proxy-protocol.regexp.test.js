@@ -1,5 +1,4 @@
-var Util = require('findhit-util'),
-  ProxyProtocolRegexp = require('../lib/proxy-protocol.regexp.js'),
+var ProxyProtocolRegexp = require('../lib/proxy-protocol.regexp.js'),
   sinon = require('sinon'),
   chai = require('chai'),
   expect = chai.expect
